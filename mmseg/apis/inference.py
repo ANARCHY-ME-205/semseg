@@ -157,7 +157,7 @@ def show_result_pyplot(model: BaseSegmentor,
                        draw_gt: bool = True,
                        draw_pred: bool = True,
                        wait_time: float = 0,
-                       show: bool = True,
+                       show: bool = False,
                        save_dir=None,
                        out_file=None):
     """Visualize the segmentation results on the image.
@@ -208,7 +208,7 @@ def show_result_pyplot(model: BaseSegmentor,
         draw_pred=draw_pred,
         wait_time=wait_time,
         out_file=out_file,
-        show=show)
+        show=False)
     vis_img = visualizer.get_image()
 
     return vis_img

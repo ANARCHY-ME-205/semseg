@@ -230,7 +230,7 @@ class CrossEntropyLoss(nn.Module):
         self.reduction = reduction
         self.loss_weight = loss_weight
         self.class_weight = get_class_weight(class_weight)
-        self.avg_non_ignore = avg_non_ignore
+        self.avg_non_ignore = True
         if not self.avg_non_ignore and self.reduction == 'mean':
             warnings.warn(
                 'Default ``avg_non_ignore`` is False, if you would like to '
