@@ -10,9 +10,9 @@ MMSegmentation works on Linux, Windows and macOS. It requires Python 3.7+, CUDA 
 ### Installing dependencies : 
 
 ```shell
-pip install testresources
-pip install launchpadlib
-pip install --upgrade pip setuptools
+pip install testresources ;
+pip install launchpadlib ;
+pip install --upgrade pip setuptools ;
 pip install --upgrade six 
 ```
 
@@ -21,13 +21,14 @@ pip install --upgrade six
 **Step 1.** Installing mmengine and mmcv using openmim
 
 ```shell
-pip install -U openmim
-mim install mmengine
-mim install "mmcv>=2.0.0"
+pip install -U openmim ;
+mim install mmengine ;
+mim install "mmcv>=2.0.0" 
 ```
 **Step 2.** Install MMSegmentation.
 
 ```shell
+cd semseg ; 
 pip install -v -e .
 # '-v' means verbose, or more output
 # '-e' means installing a project in editable mode,

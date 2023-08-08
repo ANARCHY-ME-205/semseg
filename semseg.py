@@ -4,7 +4,6 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge 
 import numpy as np 
-import pandas as pd
 import cv2
 from mmseg.apis import inference_model, init_model, show_result_pyplot
 # from mmseg.models import build_segmentor
@@ -31,6 +30,43 @@ def predict (img) :
   
     return result_img
 
+def binary (img) :
+
+    
+    
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #ori = img
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    
+    # Mouse callback function
+    # def get_intensity(event, x, y, flags, param):
+    #     if event == cv2.EVENT_LBUTTONDOWN:  # Check for left mouse button click
+    #         intensity = img[y, x]
+    #         print(f"Intensity at pixel ({x}, {y}): {intensity}")
+
+    
+    # Create a window and set the mouse callback
+    # cv2.namedWindow('Image')
+    # cv2.setMouseCallback('Image', get_intensity)
+
+    lower = np.array([150, 128, 128])
+    upper = np.array([150, 128, 128])
+
+    result = cv2.inRange(img, lower, upper)
+    
+
+    return result
+
+    # cv2.waitKey(1)
+
+    # while True :
+    #     cv2.imshow('Image', img)
+    #     cv2.imshow('result', result)
+    #     cv2.imshow('ori', ori)
+    #     if cv2.waitKey(1) == ord('q') : 
+    #         break
+
+    # cv2.destroyAllWindows()
 
 def drive_rgb (img : Image):
     
@@ -38,15 +74,21 @@ def drive_rgb (img : Image):
 
     image = bridge.imgmsg_to_cv2(img, desired_encoding='passthrough')
     image_rgb = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
-    #print(image_rgb.shape)
+    copy = image_rgb
     target_size = (1024,1024)
     image_rgb = cv2.resize(image_rgb, target_size)
     mod_result = predict(image_rgb)
     target_size = (1920,1080)
     mod_result = cv2.resize(mod_result, target_size)
+    result = binary(mod_result)
+    flip = cv2.bitwise_not(result)
+    rgb_masked_img = cv2.bitwise_and(copy, copy, mask=flip)
     mod_result = bridge.cv2_to_imgmsg(mod_result, encoding='rgb8') 
-
+    result = bridge.cv2_to_imgmsg(result, encoding='8UC1')
+    rgb_masked_img = bridge.cv2_to_imgmsg(rgb_masked_img, encoding='bgr8')
+    pub.publish(result)
     pub1.publish(mod_result)
+    pub2.publish(rgb_masked_img)
 
 
 
@@ -54,9 +96,9 @@ def drive_rgb (img : Image):
 if __name__ == '__main__' :
     
     rospy.init_node("DRIVE")
-    # pub=rospy.Publisher("/zed2i/drivable_region", Image, queue_size=10)
+    pub=rospy.Publisher("/zed2i/drivable_region", Image, queue_size=10)
     pub1=rospy.Publisher("/zed2i/model_result", Image, queue_size=10)
-    # pub2=rospy.Publisher("/zed2i/rgb_masked_image", Image, queue_size=10)
+    pub2=rospy.Publisher("/zed2i/rgb_masked_image", Image, queue_size=10)
     # pub3=rospy.Publisher("/zed2i/depth_masked_image", Image, queue_size=10)
     sub = rospy.Subscriber("/zed2i/zed_node/rgb/image_rect_color", Image, callback = drive_rgb)
     # sub2 = rospy.Subscriber("/zed2i/zed_node/depth/depth_registered", Image, callback = drive_depth)
