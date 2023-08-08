@@ -69,5 +69,6 @@ Option(B). **configs/pspnet/pspnet_r50b-d8_4xb2-80k_cityscapes-512x1024.py && ps
 this one is found to have the highest amount accuracy(81%) so far but very very slow computational speed something around 3 fps which is very bad.
 
 Option(C). **configs/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024.py && ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth** :   
+model link : https://download.openmmlab.com/mmsegmentation/v0.5/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth
 works with moderate accuracy and moderate speed. I will be using this for now. DISCLAIMER : Need the bolt zed cam param tuning for this to work well!!!
 
