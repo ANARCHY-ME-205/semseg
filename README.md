@@ -1,4 +1,11 @@
-# Get started: Install and Run MMSeg
+# SEMANTIC SEGMENTATION
+
+
+## Live workings of the semantic segmentation model.
+
+https://github.com/ANARCHY-ME-205/semseg/assets/129314735/22f779cf-a043-4b29-839f-3818c6688f16
+
+https://github.com/ANARCHY-ME-205/semseg/assets/129314735/8bcab38b-7e29-457a-bbd4-2185c43b5570
 
 ## Prerequisites
 
@@ -83,4 +90,6 @@ this one is found to have the highest amount accuracy(81%) so far but very very 
 Option(C). **configs/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024.py && ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth** :   
 model link : https://download.openmmlab.com/mmsegmentation/v0.5/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth
 works with moderate accuracy and moderate speed. I will be using this for now. DISCLAIMER : Need the bolt zed cam param tuning for this to work well!!!
+
+
 
