@@ -2,9 +2,19 @@
 
 ## Prerequisites
 
+# THANK, WORSHIP, PRAY to Lord Tamoghna!!!
 In this section we demonstrate how to prepare an environment with PyTorch.
 
 MMSegmentation works on Linux, Windows and macOS. It requires Python 3.7+, CUDA 10.2+ and PyTorch 1.8+.
+
+### Installing dependencies : 
+
+```shell
+pip install testresources
+pip install launchpadlib
+pip install --upgrade pip setuptools
+pip install --upgrade six 
+```
 
 ## Installation
 
@@ -35,6 +45,7 @@ import mmseg
 print(mmseg.__version__)
 # Example output: 1.0.0
 ```
+### The following steps to verify installation are optional
 
 **Step 1.** We need to download config and checkpoint files.
 
