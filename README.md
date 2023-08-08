@@ -62,15 +62,14 @@ Run semseg.py
 
 Till now,
 
-plausible semseg models : 
+### Plausible semseg models : 
 
-##### configs/bisenetv1/bisenetv1_r18-d32-in1k-pre_4xb4-160k_cityscapes-1024x1024.py  && bisenetv1_r18-d32_in1k-pre_4x4_1024x1024_160k_cityscapes_20210905_220251-8ba80eff.pth      
+Option(A). **configs/bisenetv1/bisenetv1_r18-d32-in1k-pre_4xb4-160k_cityscapes-1024x1024.py  && bisenetv1_r18-d32_in1k-pre_4x4_1024x1024_160k_cityscapes_20210905_220251-8ba80eff.pth** :   
 gives a decent computational speed of semseg although the accuracy is compromised a bit (70%).
 
-##### configs/pspnet/pspnet_r50b-d8_4xb2-80k_cityscapes-512x1024.py && pspnet_r50b-d8_512x1024_80k_cityscapes_20201225_094315-6344287a.pth :      
+Option(B). **configs/pspnet/pspnet_r50b-d8_4xb2-80k_cityscapes-512x1024.py && pspnet_r50b-d8_512x1024_80k_cityscapes_20201225_094315-6344287a.pth** :      
 this one is found to have the highest amount accuracy(81%) so far but very very slow computational speed something around 3 fps which is very bad.
 
-#### config_file = 'configs/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024.py'
-#### checkpoint_file = 'ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth' :   
-**works with moderate accuracy and moderate speed. I will be using this for now. DISCLAIMER : Need the bolt zed cam param tuning for this to work well!!!**
+Option(C). **configs/ddrnet/ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024.py && ddrnet_23-slim_in1k-pre_2xb6-120k_cityscapes-1024x1024_20230426_145312-6a5e5174.pth** :   
+works with moderate accuracy and moderate speed. I will be using this for now. DISCLAIMER : Need the bolt zed cam param tuning for this to work well!!!
 
