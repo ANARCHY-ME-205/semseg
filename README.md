@@ -18,8 +18,6 @@ mim install "mmcv>=2.0.0"
 **Step 2.** Install MMSegmentation.
 
 ```shell
-git clone -b main https://github.com/open-mmlab/mmsegmentation.git
-cd mmsegmentation
 pip install -v -e .
 # '-v' means verbose, or more output
 # '-e' means installing a project in editable mode,
