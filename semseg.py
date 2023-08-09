@@ -74,14 +74,16 @@ def drive_rgb (img : Image):
 
     image = bridge.imgmsg_to_cv2(img, desired_encoding='passthrough')
     image_rgb = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
+    #print(image_rgb.shape)
     copy = image_rgb
     target_size = (1024,1024)
     image_rgb = cv2.resize(image_rgb, target_size)
     mod_result = predict(image_rgb)
-    target_size = (1920,1080)
-    mod_result = cv2.resize(mod_result, target_size)
+    mod_result = cv2.resize(mod_result, (copy.shape[1],copy.shape[0]))
     result = binary(mod_result)
+    global flip
     flip = cv2.bitwise_not(result)
+    #print(flip.shape)
     rgb_masked_img = cv2.bitwise_and(copy, copy, mask=flip)
     mod_result = bridge.cv2_to_imgmsg(mod_result, encoding='rgb8') 
     result = bridge.cv2_to_imgmsg(result, encoding='8UC1')
@@ -90,6 +92,19 @@ def drive_rgb (img : Image):
     pub1.publish(mod_result)
     pub2.publish(rgb_masked_img)
 
+def drive_depth (img : Image):
+    
+    bridge = CvBridge()
+    global flip
+    # image = np.frombuffer(img.data, dtype=np.uint8).reshape(image.height, image.width, -1)
+    image = bridge.imgmsg_to_cv2(img, desired_encoding='passthrough')
+    # print(image.shape)
+    copy = image
+    depth_masked_img = cv2.bitwise_and(copy, copy, mask=flip)
+    # cv2.imshow('depth_mask', depth_masked_img)
+    # cv2.waitKey(1)
+    depth_masked_img = bridge.cv2_to_imgmsg(depth_masked_img, encoding='32FC1')
+    pub3.publish(depth_masked_img)
 
 
 
@@ -99,9 +114,9 @@ if __name__ == '__main__' :
     pub=rospy.Publisher("/zed2i/drivable_region", Image, queue_size=10)
     pub1=rospy.Publisher("/zed2i/model_result", Image, queue_size=10)
     pub2=rospy.Publisher("/zed2i/rgb_masked_image", Image, queue_size=10)
-    # pub3=rospy.Publisher("/zed2i/depth_masked_image", Image, queue_size=10)
+    pub3=rospy.Publisher("/zed2i/depth_masked_image", Image, queue_size=10)
     sub = rospy.Subscriber("/zed2i/zed_node/rgb/image_rect_color", Image, callback = drive_rgb)
-    # sub2 = rospy.Subscriber("/zed2i/zed_node/depth/depth_registered", Image, callback = drive_depth)
+    sub2 = rospy.Subscriber("/zed2i/zed_node/depth/depth_registered", Image, callback = drive_depth)
     # publishing_started = False
     
     rospy.spin()
