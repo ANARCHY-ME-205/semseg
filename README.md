@@ -9,10 +9,16 @@ https://github.com/ANARCHY-ME-205/semseg/assets/129314735/8bcab38b-7e29-457a-bbd
 
 ## Prerequisites
 
-# THANK, WORSHIP, PRAY to Lord Tamoghna!!!
-In this section we demonstrate how to prepare an environment with PyTorch.
+# THANK, WORSHIP, PRAY to Tamoghna!!!
 
-MMSegmentation works on Linux, Windows and macOS. It requires Python 3.7+, CUDA 10.2+ and PyTorch 1.8+.
+This requires Python 3.7+, CUDA 10.2+ and PyTorch 1.8+.
+
+#### Installing pytorch
+
+```shell
+pip install torch;
+pip install torchvision
+```
 
 ### Installing dependencies : 
 
@@ -75,9 +81,7 @@ You will see a new image `result.jpg` on your current folder, where segmentation
 
 ## Running semantic segmentation.
 
-Run semseg.py
-
-Till now,
+**Run semseg.py**
 
 ### Plausible semseg models : 
 
